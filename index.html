@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Device Preview Switcher</title>
+    <style>
+      /* General Styles */
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      /* Button Styles */
+      .button-group {
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      .button-group button {
+        padding: 10px 20px;
+        margin: 5px;
+        border: 2px solid #007bff;
+        background-color: #ffffff;
+        color: #007bff;
+        cursor: pointer;
+      }
+
+      .button-group button.active {
+        background-color: #007bff;
+        color: #ffffff;
+      }
+
+      /* Preview Image Styles */
+      .preview-container img {
+        display: none;
+        max-width: 100%;
+        height: auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .preview-container img.active {
+        display: block;
+      }
+
+      .preview-container img {
+        border-radius: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Device Preview Switcher</h1>
+
+    <!-- Button Group for Switching Devices -->
+    <div class="button-group">
+      <button data-device="mac">Mac</button>
+      <button data-device="iphone">iPhone</button>
+      <button data-device="ipad">iPad</button>
+      <button data-device="web">Web</button>
+    </div>
+
+    <!-- Image Preview Section -->
+    <div class="preview-container">
+      <img
+        src="https://via.placeholder.com/1280x800?text=Mac+Preview"
+        alt="Mac Preview"
+        class="mac-preview active"
+      />
+      <img
+        src="https://via.placeholder.com/375x812?text=iPhone+Preview"
+        alt="iPhone Preview"
+        class="iphone-preview"
+      />
+      <img
+        src="https://via.placeholder.com/768x1024?text=iPad+Preview"
+        alt="iPad Preview"
+        class="ipad-preview"
+      />
+      <img
+        src="https://via.placeholder.com/1440x900?text=Web+Preview"
+        alt="Web Preview"
+        class="web-preview"
+      />
+    </div>
+
+    <script>
+      // JavaScript for Switching Preview Images
+      const buttons = document.querySelectorAll(".button-group button");
+      const previews = document.querySelectorAll(".preview-container img");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", function () {
+          // Remove active class from all buttons and previews
+          buttons.forEach((btn) => btn.classList.remove("active"));
+          previews.forEach((preview) => preview.classList.remove("active"));
+
+          // Add active class to the clicked button and corresponding preview
+          this.classList.add("active");
+          const device = this.getAttribute("data-device");
+          document.querySelector(`.${device}-preview`).classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
